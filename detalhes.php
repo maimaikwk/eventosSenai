@@ -5,7 +5,7 @@ $eventos = $_SESSION['eventos'] ?? [];
 
 $idEvento = $_GET['id'] ?? null;
 
-// valida se o ID existe na sessão antes de acessar
+// valida se o ID existe na sessão antes de acessar.
 if ($idEvento !== null && isset($eventos[$idEvento])) {
     $eventoSelec = $eventos[$idEvento];
 } else {

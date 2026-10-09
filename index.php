@@ -8,7 +8,7 @@ $eventoAtual = null;
 
 $idSelecionado = $_GET['id'] ?? null;
 
-// verifica se o ID do evento foi informado e se existe dentro do array de eventos
+// verifica se o ID do evento foi informado e se existe dentro do array de eventos.
 if ($idSelecionado !== null && isset($eventos[$idSelecionado])) {
     $eventoDetectado = true;
     $eventoAtual = $eventos[$idSelecionado];
