@@ -24,7 +24,14 @@ $_SESSION['eventos'] = [
 'local' => 'Laboratório 2',
 'responsavel' => 'Profa. Ana'
 ]
-];
-$_SESSION['proximo_id'] = 3;
+];}
+
+$proximoID = 0;
+
+foreach($_SESSION['eventos'] as $evento){
+    $proximoID++;
 }
+
+$_SESSION['proximoID'] = $proximoID + 1;
+
 ?>

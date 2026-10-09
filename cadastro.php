@@ -10,7 +10,7 @@ require_once 'init.php';
     <h1>Eventos Senai - Cadastro</h1>
 
     <form action="processaCadastro.php" method="POST">
-        <input type="text" name="id" id="id" value="<?= $_GET['id'] ?>" hidden>
+        <input type="text" name="id" id="id" value="<?= $_SESSION['proximoID'] ?>" hidden>
 
         <label for="titulo">Título: </label>
         <input type="text" name="titulo" id="titulo" required>
