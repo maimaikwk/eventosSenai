@@ -1,16 +1,18 @@
 <?php
 require_once 'init.php';
 
-$eventos = $_SESSION['eventos'];
+$eventos = $_SESSION['eventos'] ?? [];
 
-$eventoDetectado = false; // quando TRUE significa que o user selecionou um evento
+$eventoDetectado = false; // quando TRUE significa que o user selecionou um evento válido
 $eventoAtual = null;
 
-if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])){
-        $id = $_GET['id'];
-        $eventoDetectado = true;
-    }
+$idSelecionado = $_GET['id'] ?? null;
 
+// verifica se o ID do evento foi informado e se existe dentro do array de eventos.
+if ($idSelecionado !== null && isset($eventos[$idSelecionado])) {
+    $eventoDetectado = true;
+    $eventoAtual = $eventos[$idSelecionado];
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])){
         foreach($eventos as $chave => $evento){
             print "
             <li>
-            <a href='php?id={$chave}'>
+            <a href='index.php?id={$chave}'>
             {$evento['titulo']}
             </a>
             </li>
@@ -39,21 +41,22 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['id'])){
     <hr>
     <h2>Deseja ver detalhes, excluir ou editar algum evento?</h2>
     <?php if($eventoDetectado): ?>
-        <h2>Você selecionou o evento: <?php echo $_SESSION['eventos'][$_GET['id']]['titulo'] ?></h2>
+        <h2>Você selecionou o evento: <?php echo $eventoAtual['titulo'] ?></h2>
         <form action="">
             <input type="text" name="id" id="id" 
-            value="<?= $_GET['id'] ?>"
+            value="<?= $idSelecionado ?>"
             hidden>
 
-            <a href="./detalhes.php?id=<?php echo $id ?>">
+            <a href="./detalhes.php?id=<?php echo $idSelecionado ?>">
                 <button type="button">Detalhes</button>
             </a>
-            <a href="./edicao.php?id=<?php echo $id ?>">
+            <a href="./edicao.php?id=<?php echo $idSelecionado ?>">
                 <button type="button">Alterar</button>
             </a>
-            <a href="./remocao.php?id=<?php echo $id ?>">
+            <a href="./remocao.php?id=<?php echo $idSelecionado ?>">
                 <button type="button">Excluir</button>
             </a>
+            
         </form>    
         <?php else: ?>
             <h2>Selecione um evento acima!</h2>

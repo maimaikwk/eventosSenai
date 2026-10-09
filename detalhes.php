@@ -1,14 +1,17 @@
 <?php
-
 require_once 'init.php';
 
-$eventos = $_SESSION['eventos'];
+$eventos = $_SESSION['eventos'] ?? [];
 
-$idEvento = $_GET['id'];
+$idEvento = $_GET['id'] ?? null;
 
-$eventoSelec = $_SESSION['eventos'][$idEvento];
-
-
+// valida se o ID existe na sessão antes de acessar.
+if ($idEvento !== null && isset($eventos[$idEvento])) {
+    $eventoSelec = $eventos[$idEvento];
+} else {
+    header('Location: index.php?erro=evento_nao_encontrado');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +19,7 @@ $eventoSelec = $_SESSION['eventos'][$idEvento];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detalhes do Evento</title>
 </head>
 <body>
     <?php require_once __DIR__ . '/nav.php' ?>
@@ -53,14 +56,13 @@ $eventoSelec = $_SESSION['eventos'][$idEvento];
             <td>Título</td>
             <td>Selecionar</td>
         </tr>
-        <?php foreach($eventos as $evento){ ?>
-            <?php if($evento['id'] == $idEvento){ 
-                continue; } ?>
+        <?php foreach($eventos as $chave => $evento){ ?>
+            <?php if($chave == $idEvento){ continue; } ?>
             <tr>
                 <th><?php echo $evento['titulo'] ?></th>
-                <th><a href="./detalhes.php?id=<?php echo $evento['id'] ?>">Selecionar evento</a></th>
+                <th><a href="./detalhes.php?id=<?php echo $chave ?>">Selecionar evento</a></th>
             </tr>
-            <?php } ?>
-        </table>
+        <?php } ?>
+    </table>
 </body>
 </html>
