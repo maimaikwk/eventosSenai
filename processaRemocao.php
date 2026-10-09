@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if(isset($_POST['confirmar'])){
         unset($_SESSION['eventos'][$id]);
-        header("Location: remocao.php?confirmacao=Evento Removido com Sucesso!");
+        header("Location: index.php?confirmacao=Evento Removido com Sucesso!");
         exit;
         
     }elseif(isset($_POST['desistir'])){

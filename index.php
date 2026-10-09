@@ -61,5 +61,7 @@ if ($idSelecionado !== null && isset($eventos[$idSelecionado])) {
         <?php else: ?>
             <h2>Selecione um evento acima!</h2>
         <?php endif; ?>
+        <hr>
+        <?php echo $_GET['confirmacao'] ?>
 </body>
 </html>     
