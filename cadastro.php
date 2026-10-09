@@ -1,5 +1,3 @@
-cadastro.php
-
 <?php
 require_once 'init.php';
 ?>
@@ -8,8 +6,9 @@ require_once 'init.php';
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h1>Eventos Senai - Cadastro</h1>
     <?php require_once __DIR__ . "/nav.php"; ?>
+    <h1>Eventos Senai - Cadastro</h1>
+    
 
     <form action="processaCadastro.php" method="POST">
         <input type="text" name="id" id="id" value="<?= $_GET['id'] ?>" hidden>
