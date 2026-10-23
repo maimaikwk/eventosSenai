@@ -75,5 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id']) && $_GET['id'] != "
             <br>
             <h4>Selecione um dos eventos acima para remover.</h4>
             <?php endif; ?>
+            <hr>
+            <?php echo $_GET['confirmacao'] ?>
 </body>
 </html>
